@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Vector Quantized Diffusion Model with CodeUnet for Text-to-Sign Pose Sequences Generation">
+    <meta name="keywords" content="SLP, Video Synthesis">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vector Quantized Diffusion Model with CodeUnet for Text-to-Sign Pose Sequences Generation</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-2 publication-title">Vector Quantized Diffusion Model with CodeUnet for Text-to-Sign Pose Sequences Generation</h1>
+                        <!-- <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=DxPjkDoAAAAJ&hl=en">Yu
+                                    Tian</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://alanspike.github.io">Jian Ren</a><sup>2</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://mlchai.com">Menglei Chai</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://kyleolsz.github.io">Kyle Olszewski</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://sites.google.com/site/xipengcshomepage/home">Xi Peng</a><sup>3</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://www.cs.rutgers.edu/~dnm/">Dimitris N. Metaxas</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="http://www.stulyakov.com/">Sergey Tulyakov</a><sup>2</sup>
+                            </span>
+                        </div> -->
+
+                        <!-- <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>Rutgers University,</span>
+                            <span class="author-block"><sup>2</sup>Snap Inc.,</span>
+                            <span class="author-block"><sup>3</sup>University of Delaware</span>
+                        </div> -->
+                        <!-- <h1 style="font-size:23px;font-weight:bold"></h1> -->
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <!-- <span class="link-block">
+                                    <a href="https://openreview.net/forum?id=6puCSjH3hwA"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>OpenReview</span>
+                                    </a>
+                                </span> -->
+                                <!-- <span class="link-block">
+                                    <a href="" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span> -->
+                                <!-- Video Link. -->
+                                <!-- <span class="link-block">
+                                    <a href="" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-youtube"></i>
+                                        </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span> -->
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/snap-research/MoCoGAN-HD"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="hero is-light is-small">
+        <div class="hero-body">
+            <div class="container">
+                <div id="results-carousel" class="carousel results-carousel">
+                    <div class="item item-face">
+                        <video poster="" id="face" autoplay controls muted loop height="100%">
+                            <source src="videos/top/rec_wer_0.25_ori_wer_0.38_JETZT_WETTER_WIE-AUSSEHEN_MORGEN_MITTWOCH_SECHSZEHN_FEBRUAR_ZEIGEN-BILDSCHIRM.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-sky">
+                        <video poster="" id="sky" autoplay controls muted loop height="100%">
+                            <source src="videos/top/rec_wer_0.29_ori_wer_0.43_JETZT_WETTER_WIE-AUSSEHEN_MORGEN_SAMSTAG_SIEBTE_AUGUST.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-dog">
+                        <video poster="" id="dog" autoplay controls muted loop height="100%">
+                            <source src="videos/top/rec_wer_0.33_ori_wer_0.33_SCHOEN_ABEND_WUENSCHEN.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-ffhq">
+                        <video poster="" id="ffhq" autoplay controls muted loop height="100%">
+                            <source src="videos/top/rec_wer_0.33_ori_wer_0.11_JETZT_WETTER_VORAUS_INFORMIEREN_MORGEN_DIENSTAG_EINS_ZWANZIG_JUNI.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- <div class="item item-anime">
+                        <video poster="" id="anime" autoplay controls muted loop height="100%">
+                            <source src="videos/top/rec_wer_0.33_ori_wer_0.33_SCHOEN_ABEND_WUENSCHEN.mp4" type="video/mp4">
+                        </video>
+                    </div> -->
+                    <!-- <div class="item item-church">
+                        <video poster="" id="church" autoplay controls muted loop height="100%">
+                            <source src="videos/demo2.mp4" type="video/mp4">
+                        </video>
+                    </div> -->
+
+
+                </div>
+            </div>
+        </div>
+        <div align="center">
+            Sign language production
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container">
+
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-two-thirds">
+                    <h2 class="title is-2">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Sign Language Production (SLP) aims to translate spoken languages into sign sequences automatically. The core process of SLP is to transform sign gloss sequences into their corresponding sign pose sequences (G2P). In this paper, we propose a novel paradigm to realize this pose sequence generation task. Specifically, we transform the continuous pose space generation problem into a discrete space sequencegeneration problem: 1) we introduce Pose-VQVAE, a new framework that combines VAEs with vector quantization to obtain a discrete latent representation for the continuous pose sequence. 2) we model the latent prior by proposed PoseVQ-Diffusion, which is a denoising diffusion architecture for length-varied discrete sequence data. Besides, we propose a CodeUnet model to better leverage the spatial-temporal information for generating higher-quality pose sequences in discrete space. Moreover, we develop a heuristic sequential clustering method to predict the variable lengths of pose sequences for corresponding gloss sequences. Consequently, compared with previous state-of-the-art G2P models, our model achieves significantly better performance on the public SLP evaluation benchmark.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Abstract. -->
+
+        <!-- Paper video. -->
+        <!-- <div class="columns is-centered has-text-centered">
+            <div class="column is-two-thirds">
+                <h2 class="title is-2">Video</h2>
+                <div class="publication-video">
+                    <iframe src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div> -->
+        <!--/ Paper video. -->
+    </section>
+
+
+    <section class="section">
+        <div class="container">
+
+            <div class="columns is-centered">
+                <!-- 32 frames -->
+                <div class="column">
+                    <div class="content">
+                        <!-- <h2 class="title is-3">32-Frames</h2> -->
+                        <p>
+                            GUT ABEND LIEB ZUSCHAUER
+                        </p>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="content">
+                        <!-- <h2 class="title is-3">64-Frames</h2> -->
+                        <p>
+                            MITTWOCH KOMMEN REGEN REGION
+                        </p>
+                    </div>
+                </div>
+                <!-- 64 frames -->
+
+                <!-- 32 frames -->
+                <div class="column">
+                    <div class="content">
+                        <!-- <h2 class="title is-3">32-Frames</h2> -->
+                        <p>
+                            JETZT WETTER WIE-AUSSEHEN MORGEN MITTWOCH SECHSZEHN FEBRUAR ZEIGEN-BILDSCHIRM
+                        </p>
+                    </div>
+                </div>
+                <!-- 32 frames -->
+            </div>
+
+            <div class="columns is-centered">
+                <!-- 32 frames -->
+                <div class="column">
+                    <div class="content">
+                        <!-- <h2 class="title is-3">32-Frames</h2> -->
+                        <!-- <p>
+                            GUT ABEND LIEB ZUSCHAUER
+                        </p> -->
+                        <video id="FaceForensics-32" autoplay controls muted loop height="100%">
+                            <source src="videos/down/rec_wer_0.25_ori_wer_0.00_GUT_ABEND_LIEB_ZUSCHAUER.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="content">
+                        <!-- <h2 class="title is-3">64-Frames</h2> -->
+                        <!-- <p>
+                            MITTWOCH KOMMEN REGEN REGION
+                        </p> -->
+                        <video id="FaceForensics-64" autoplay controls muted loop height="100%">
+                            <source src="videos/down/rec_wer_0.25_ori_wer_0.25_MITTWOCH_KOMMEN_REGEN_REGION.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <!-- 64 frames -->
+
+                <!-- 32 frames -->
+                <div class="column">
+                    <div class="content">
+                        <!-- <h2 class="title is-3">32-Frames</h2> -->
+                        <!-- <p>
+                            JETZT WETTER WIE-AUSSEHEN MORGEN MITTWOCH SECHSZEHN FEBRUAR ZEIGEN-BILDSCHIRM
+                        </p> -->
+                        <video id="AFHQ-DOG-Interpolate_32" autoplay controls muted loop height="100%">
+                            <source src="videos/down/rec_wer_0.25_ori_wer_0.38_JETZT_WETTER_WIE-AUSSEHEN_MORGEN_MITTWOCH_SECHSZEHN_FEBRUAR_ZEIGEN-BILDSCHIRM.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <!-- 32 frames -->
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+    <!-- <section class="section" id="BibTeX">
+        <div class="container content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>
+@inproceedings{
+    tian2021a,
+    title={A Good Image Generator Is What You Need for High-Resolution Video Synthesis},
+    author={Yu Tian and Jian Ren and Menglei Chai and Kyle Olszewski and Xi Peng and Dimitris N. Metaxas and Sergey Tulyakov},
+    booktitle={International Conference on Learning Representations},
+    year={2021},
+    url={https://openreview.net/forum?id=6puCSjH3hwA}
+}
+      </code></pre>
+        </div>
+    </section> -->
+
+
+    <footer class="footer">
+        <div align="center" class="container">
+            <div class="columns is-centered">
+                <div class="content">
+                    This website is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
